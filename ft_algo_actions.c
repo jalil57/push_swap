@@ -10,6 +10,7 @@ void		action_sa(t_algo *algo)
 		algo->pile_a->number = algo->pile_a->next->number;
 		algo->pile_a->next->number = swap;
 	}
+	algo->count++;
 	ft_putstr("sa\n");
 }
 
@@ -23,6 +24,7 @@ void		action_sb(t_algo *algo)
 		algo->pile_b->number = algo->pile_b->next->number;
 		algo->pile_b->next->number = swap;
 	}
+	algo->count++;
 	ft_putstr("sb\n");
 }
 
@@ -38,14 +40,24 @@ void		action_pb(t_algo *algo)
 	if (algo->pile_b)
 	{
 		algo->pile_b->prev = save;
-		algo->pile_b->prev->next = algo->pile_b->prev;
-		algo->pile_b = algo->pile_b;
+		save->next->prev = NULL;
+		algo->pile_b->prev->next = algo->pile_b;
+		algo->pile_b = algo->pile_b->prev;
 	}
 	else
 	{
 		algo->pile_b = save;
+		save->next->prev = NULL;
 		algo->pile_b->next = NULL;
+		algo->pile_b->prev = NULL;
 	}
+	algo->len_a--;
+	algo->len_b++;
+	if (algo->pile_b->number > algo->max_b)
+		algo->max_b = algo->pile_b->number;
+	if (algo->pile_b->number > algo->min_b)
+		algo->min_b = algo->pile_b->number;
+	algo->count++;
 	ft_putstr("pb\n");
 }
 
@@ -69,5 +81,10 @@ void		action_pa(t_algo *algo)
 		algo->pile_a = save;
 		algo->pile_a->next = NULL;
 	}
+	algo->len_b--;
+	algo->len_a++;
+	if (algo->pile_a->number > algo->max_a)
+		algo->max_a = algo->pile_a->number;
+	algo->count++;
 	ft_putstr("pa\n");
 }

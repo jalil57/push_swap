@@ -2,26 +2,27 @@
 
 void		print_piles(t_algo *algo)
 {
-	t_list		*tmp;
+	t_list		*tmp_a;
+	t_list		*tmp_b;
 
-	tmp = algo->pile_a;
-	ft_putstr("A: ");
-	while (tmp)
+	tmp_a = algo->pile_a;
+	tmp_b = algo->pile_b;
+	printf("A: ");
+	while (tmp_a)
 	{
-		ft_printf("%d ", tmp->number);
-		tmp = tmp->next;
+		printf("%ld ", tmp_a->number);
+		tmp_a = tmp_a->next;
 	}
-	ft_putstr("\nB: ");
-	tmp = algo->pile_b;
-	while (tmp)
+	printf("\nB: ");
+	while (tmp_b)
 	{
-		ft_printf("%d ", tmp->number);
-		tmp = tmp->next;
+		printf("%ld ", tmp_b->number);
+		tmp_b = tmp_b->next;
 	}
-	ft_putchar('\n');	
+	printf("\n\n");
 }
 
-void		check_pile(t_algo *algo)
+int			check_pile(t_algo *algo)
 {
 	t_list		*tmp;
 
@@ -29,13 +30,10 @@ void		check_pile(t_algo *algo)
 	while (tmp->next)
 	{
 		if (tmp->next->number < tmp->number)
-		{
-			ft_putstr("KO\n");
-			return ;
-		}
+			return (0);
 		tmp = tmp->next;
 	}
-	ft_putstr("OK\n");
+	return (1);
 }
 
 int			check_error(char *str)
@@ -75,7 +73,10 @@ int			list_is_valid(char	**list)
 		while (found < search)
 		{
 			if (ft_strequ(list[found], list[search]))
+			{
+				printf("DOUBLON\n");
 				return (0);
+			}
 			found++;
 		}
 		search++;
@@ -116,30 +117,47 @@ t_algo		*init_algo(char **numbers)
 	algo->pile_b = NULL;
 	tmp = algo->pile_a;
 	i = 1;
+	algo->max_a = -__INT_MAX__ - 1;
+	algo->max_b = -__INT_MAX__ - 1;
+	algo->min_a = __INT_MAX__;
+	algo->min_b = __INT_MAX__;
 	while (numbers[i])
 	{
 		tmp->next = new_number(tmp, numbers[i++]);
+		if (tmp->number > algo->max_a)
+			algo->max_a = tmp->number;
+		if (tmp->number < algo->min_a)
+			algo->min_a = tmp->number;
 		tmp = tmp->next;
 	}
+	algo->len_a = i - 1;
+	algo->len_b = 0;
+	algo->count = 0;
 	return (algo);
 }
 
 int			main(int ac, char **av)
 {
+	(void)ac;
+	(void)av;
 	t_algo	*algo;
 // attention au checking a la fin
 	av = randomize(LEN_LIST);
-	if (!list_is_valid(av + 1) && ac == 1)
+	if (!list_is_valid(av))
 	{
 		ft_putstr("KO\n");
 		return (0);
 	}
 	if (!(algo = init_algo(av + 1)))
 		return (0);
-	print_piles(algo);
 
-	action_rra(algo);
+	//print_piles(algo);
+//sleep(2);
+		split_mediane(algo);
+	//print_piles(algo);
+	insert_b(algo);
 	print_piles(algo);
+	printf("fait en %d coups\n", algo->count);
 	//check_pile(algo);
 	free(algo->pile_a);
 	free(algo->pile_b);

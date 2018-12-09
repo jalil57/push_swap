@@ -36,16 +36,19 @@ void		action_rb(t_algo *algo)
 
 void		action_rra(t_algo *algo)
 {
-	t_list		*tmp;
+	long		swap;
+	t_list		*last;
 
-	tmp = algo->pile_a;
-	while (tmp->next)
-		tmp = tmp->next;
-	algo->pile_a->prev = tmp;
-	tmp->next = algo->pile_a;
-	tmp->prev->next = NULL;
-	tmp->prev = NULL;
-	algo->pile_a = algo->pile_a->prev;
+	last = algo->pile_a;
+	while (last->next)
+		last = last->next;
+	while (last->prev)
+	{
+		swap = last->number;
+		last->number = last->prev->number;
+		last->prev->number = swap;
+		last = last->prev;
+	}
 	ft_putstr("rra\n");
 }
 

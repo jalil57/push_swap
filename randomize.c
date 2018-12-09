@@ -8,13 +8,23 @@ char    **randomize(int len)
     char    **list;
 
     i = 0;
-    list = (char **)malloc(sizeof(char *) * len + 1);
     srand(time(NULL));
-    while (i < len)
+    list = (char **)malloc(sizeof(char *) * len + 1);
+    while (len > 0)
     {
-        list[i] = ft_itoa((i + (rand() % ((NBMAX - NBMIN) + NBMIN))));
+        list[len] = ft_itoa(len);
+        len--;
+    }
+  //  i = 0;
+/*    while (i < len)
+    {
+        int x = rand() % len + 1;
+        int y = rand() % len + 1;
+        char *swap = list[x];
+        list[x] = list[y];
+        list[y] = swap;
         i++;
     }
-    list[len] = NULL;
+*/
     return (list);
 }
