@@ -127,8 +127,9 @@ t_algo		*init_algo(char **numbers)
 int			main(int ac, char **av)
 {
 	t_algo	*algo;
-
-	if (ac == 1 || !list_is_valid(av + 1))
+// attention au checking a la fin
+	av = randomize(LEN_LIST);
+	if (!list_is_valid(av + 1) && ac == 1)
 	{
 		ft_putstr("KO\n");
 		return (0);

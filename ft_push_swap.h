@@ -1,6 +1,9 @@
 #ifndef FT_PUSH_SWAP_H
 # define FT_PUSH_SWAP_H
 # include "libft/libft.h"
+# define NBMIN      -500
+# define NBMAX      500
+# define LEN_LIST   10
 
 typedef struct      s_algo
 {
@@ -11,6 +14,7 @@ typedef struct      s_algo
 /*
 **      utils
 */
+char            **randomize(int len);
 void		    print_piles(t_algo *algo);
 
 /*
