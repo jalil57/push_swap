@@ -6,7 +6,7 @@
 /*   By: jtaibi <jtaibi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 22:42:10 by jtaibi            #+#    #+#             */
-/*   Updated: 2018/12/07 23:05:11 by jtaibi           ###   ########.fr       */
+/*   Updated: 2018/12/09 10:07:03 by jtaibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 typedef struct		s_list
 {
-	int				number;
+	long int		number;
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
@@ -54,6 +54,7 @@ void				ft_strclr(char *s);
 void				ft_memdel(void **ap);
 void				ft_strdel(char **as);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+int					ft_strisdigit(char *str);
 int					ft_intlen(int nbr);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -75,6 +76,7 @@ int					ft_isintab(char *s, char c);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 size_t				ft_strlen(char const *str);
 long long			ft_power(long long number, int power);
+long int			ft_atol(const char *nptr);
 char				*ft_strcreate(size_t size, char c);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strncat(char *dest, const char *src, size_t n);
