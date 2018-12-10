@@ -6,7 +6,7 @@
 #    By: jtaibi <jtaibi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:08:47 by jtaibi            #+#    #+#              #
-#    Updated: 2018/12/09 10:06:06 by jtaibi           ###   ########.fr        #
+#    Updated: 2018/12/10 11:09:11 by jtaibi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = ft_strjoinfree.c ft_strcapitalize.c ft_str_reverse.c ft_strcreate.c \
 	  ft_strrchr.c ft_strslen.c ft_strsplit.c ft_strstr.c ft_strsub.c \
 	  ft_strtrim.c ft_tolower.c ft_toupper.c ft_putchar_fd.c ft_putendl.c \
 	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putnbr.c ft_strnstr.c \
-	  ft_itoa_base.c ft_power.c ft_strisdigit.c ft_atol.c
+	  ft_itoa_base.c ft_power.c ft_strisdigit.c ft_atol.c ft_color.c
 
 FT_PRINTF = ft_printf/ft_printf.c ft_printf/ft_get_specifications.c \
 			ft_printf/ft_get_modifiers.c ft_printf/ft_convertion_utils.c \

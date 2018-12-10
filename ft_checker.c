@@ -2,24 +2,36 @@
 
 void		print_piles(t_algo *algo)
 {
-	t_list		*tmp_a;
-	t_list		*tmp_b;
+	t_list		*a;
+	t_list		*b;
 
-	tmp_a = algo->pile_a;
-	tmp_b = algo->pile_b;
-	printf("A: ");
-	while (tmp_a)
+	a = algo->pile_a;
+	b = algo->pile_b;
+	ft_putstr("*---------------*\n");
+	ft_printf("|   A:  |   B:  |\n");
+	ft_putstr("*---------------*\n");
+	while (a || b)
 	{
-		printf("%ld ", tmp_a->number);
-		tmp_a = tmp_a->next;
+		if (a && b)
+		{
+			ft_printf("| %5ld | %-5ld |\n", a->number, b->number);
+			a = a->next;
+			b = b->next;
+		}
+		else if (a)
+		{
+			ft_printf("| %5ld |       |\n", a->number);
+			a = a->next;
+		}
+		else if (b)
+		{
+			ft_printf("|       | %-5ld |\n", b->number);
+			b = b->next;
+		}
+		ft_putstr("*---------------*\n");
 	}
-	printf("\nB: ");
-	while (tmp_b)
-	{
-		printf("%ld ", tmp_b->number);
-		tmp_b = tmp_b->next;
-	}
-	printf("\n\n");
+	ft_printf("| hits: %-7d |\n", algo->count);
+	ft_putstr("*---------------*\n");
 }
 
 int			check_pile(t_algo *algo)
@@ -66,17 +78,14 @@ int			list_is_valid(char	**list)
 	{
 		if (!check_error(list[search]))
 		{
-			ft_putstr("Error\n");
+			ft_color("Error\n", RED);
 			exit(0);
 		}
 		found = 0;
 		while (found < search)
 		{
 			if (ft_strequ(list[found], list[search]))
-			{
-				printf("DOUBLON\n");
 				return (0);
-			}
 			found++;
 		}
 		search++;
@@ -93,7 +102,7 @@ t_list		*new_number(t_list *prev, char *number)
 	if ((maillon->number = ft_atol(number)) > __INT_MAX__ ||
 			maillon->number < -__INT_MAX__ - 1)
 	{
-		ft_putstr("Error\n");
+		ft_color("Error\n", RED);
 		exit(0);
 	}
 	maillon->next = NULL;
@@ -117,10 +126,10 @@ t_algo		*init_algo(char **numbers)
 	algo->pile_b = NULL;
 	tmp = algo->pile_a;
 	i = 1;
-	algo->max_a = -__INT_MAX__ - 1;
-	algo->max_b = -__INT_MAX__ - 1;
-	algo->min_a = __INT_MAX__;
-	algo->min_b = __INT_MAX__;
+	algo->max_a = -__LONG_MAX__;
+	algo->max_b = -__LONG_MAX__;
+	algo->min_a = __LONG_MAX__;
+	algo->min_b = __LONG_MAX__;
 	while (numbers[i])
 	{
 		tmp->next = new_number(tmp, numbers[i++]);
@@ -152,6 +161,30 @@ int			check_tab(char **list)
 	return (1);
 }
 
+void		free_algo(t_algo *algo)
+{
+	t_list		*tmp;
+	t_list		*save;
+
+	tmp = algo->pile_a;
+	while (tmp)
+	{
+		save = tmp->next;
+		free(tmp);
+		tmp = save;
+	}
+	free(algo->pile_a);
+	tmp = algo->pile_b;
+	while (tmp)
+	{
+		save = tmp->next;
+		free(tmp);
+		tmp = save;
+	}
+	free(algo->pile_b);
+	free(algo);
+}
+
 int			main(int ac, char **av)
 {
 	t_algo	*algo;
@@ -160,30 +193,26 @@ int			main(int ac, char **av)
 		return (1);
 	if (ac == 2 || check_tab(av + 1))
 	{
-		ft_putstr("OK\n");
+		ft_color("OK\n", GREEN);
 		return (1);
 	}
 	else if (!list_is_valid(av + 1))
 	{
-		ft_putstr("KO\n");
+		ft_color("KO\n", RED);
 		return (0);
 	}
 	if (!(algo = init_algo(av + 1)))
 		return (0);
 	split_mediane(algo);
-print_piles(algo);
-sleep(3);
 	insert_b(algo);
 	print_piles(algo);
 	if (check_pile(algo))
 	{
-		ft_putstr("OK\n");
+		ft_color("OK\n", GREEN);
 		printf("fait en %d coups\n", algo->count);
 	}
 	else
-		ft_putstr("KO\n");
-	free(algo->pile_a);
-	free(algo->pile_b);
-	free(algo);
+		ft_color("KO\n", RED);
+	free_algo(algo);
 	return (0);
 }

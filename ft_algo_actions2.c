@@ -1,38 +1,36 @@
-#include "ft_push_swap.h"
+ #include "ft_push_swap.h"
 
 void		action_ra(t_algo *algo)
 {
+	int			swap;
 	t_list		*tmp;
 
-	if (!algo->pile_a && !algo->pile_a->next)
-		return ;
 	tmp = algo->pile_a;
-	while (tmp->next)
+	while (tmp && tmp->next)
+	{
+		swap = tmp->number;
+		tmp->number = tmp->next->number;
+		tmp->next->number = swap;
 		tmp = tmp->next;
-	tmp->next = algo->pile_a;
-	tmp = tmp->next;
-	algo->pile_a = algo->pile_a->next;
-	algo->pile_a->prev = NULL;
-	tmp->next = NULL;
+	}
 	algo->count++;
 	ft_putstr("ra\n");
 }
 
 void		action_rb(t_algo *algo)
 {
+	int			swap;
 	t_list		*tmp;
 
-	if (!algo->pile_b && !algo->pile_b->next)
-		return ;
 	tmp = algo->pile_b;
-	while (tmp->next)
+	while (tmp && tmp->next)
+	{
+		swap = tmp->number;
+		tmp->number = tmp->next->number;
+		tmp->next->number = swap;
 		tmp = tmp->next;
-	tmp->next = algo->pile_b;
-	tmp = tmp->next;
-	algo->pile_b = algo->pile_b->next;
-	algo->pile_b->prev = NULL;
-	tmp->next = NULL;
-		algo->count++;
+	}
+	algo->count++;
 	ft_putstr("rb\n");
 }
 
@@ -51,7 +49,7 @@ void		action_rra(t_algo *algo)
 		last->prev->number = swap;
 		last = last->prev;
 	}
-		algo->count++;
+	algo->count++;
 	ft_putstr("rra\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: jtaibi <jtaibi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 22:42:10 by jtaibi            #+#    #+#             */
-/*   Updated: 2018/12/09 10:07:03 by jtaibi           ###   ########.fr       */
+/*   Updated: 2018/12/10 11:15:59 by jtaibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/fcntl.h>
 # include <limits.h>
+# include "ft_color.h"
 # include "ft_printf/ft_printf.h"
 
 typedef struct		s_list
@@ -31,6 +32,7 @@ typedef struct		s_list
 	struct s_list	*prev;
 }					t_list;
 
+void				ft_color(char *str, char *color);
 void				ft_strcapitalize(char *str);
 void				ft_str_reverse(char *str);
 void				ft_putnbr(int n);
