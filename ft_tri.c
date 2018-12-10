@@ -29,18 +29,18 @@ static int		have_inf_mediane(t_list	*list, int mediane)
 	return (0);
 }
 
-int			get_min(t_list *tmp)
+int			get_max(t_list *tmp)
 {
-	int		min;
+	int		max;
 
-	min = tmp->number;
+	max = tmp->number;
 	while (tmp)
 	{
-		if (tmp->number > min)
-			min = tmp->number;
+		if (tmp->number > max)
+			max = tmp->number;
 		tmp = tmp->next;
 	}
-	return (min);
+	return (max);
 }
 
 void		split_mediane(t_algo *algo)
@@ -49,8 +49,8 @@ void		split_mediane(t_algo *algo)
 
 	mediane = calculate_mediane(algo->pile_a);
 	printf("mediane = %d\n", mediane);
-	algo->min_a = get_min(algo->pile_a);
-	while (algo->pile_a->number != algo->min_a)
+	algo->max_a = get_max(algo->pile_a);
+	while (algo->pile_a->number != algo->max_a)
 		action_ra(algo);
 	while (have_inf_mediane(algo->pile_a, mediane))
 	{
@@ -85,11 +85,11 @@ void		split_mediane(t_algo *algo)
 
 void		insert_b(t_algo *algo)
 {
-	int min;
+	int max;
 
-	min = get_min(algo->pile_b);
-	while (algo->pile_b->number != min)
-		action_rb(algo);
+	max = get_max(algo->pile_b);
+	while (algo->pile_b->number != max)
+		action_rrb(algo);
 	action_pa(algo);
 	if (algo->len_b)
 		insert_b(algo);

@@ -24,14 +24,14 @@ void		print_piles(t_algo *algo)
 
 int			check_pile(t_algo *algo)
 {
-	t_list		*tmp;
+	t_list	*pile;
 
-	tmp = algo->pile_a;
-	while (tmp->next)
+	pile = algo->pile_a;
+	while (pile->next)
 	{
-		if (tmp->next->number < tmp->number)
+		if (pile->number > pile->next->number)
 			return (0);
-		tmp = tmp->next;
+		pile = pile->next;
 	}
 	return (1);
 }
@@ -74,7 +74,7 @@ int			list_is_valid(char	**list)
 		{
 			if (ft_strequ(list[found], list[search]))
 			{
-				ft_putstr("Error\n");
+				printf("DOUBLON\n");
 				return (0);
 			}
 			found++;
@@ -136,35 +136,50 @@ t_algo		*init_algo(char **numbers)
 	return (algo);
 }
 
+int			check_tab(char **list)
+{
+	int		i;
+
+	i = 0;
+	if (!list_is_valid(list))
+		return (0);
+	while (list[i + 1])
+	{
+		if (ft_atol(list[i]) > ft_atol(list[i + 1]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int			main(int ac, char **av)
 {
 	t_algo	*algo;
 
-	if (ac < 2)
-		return (0);
-	if (!list_is_valid(av + 1))
+	if (ac == 1)
+		return (1);
+	if (ac == 2 || check_tab(av + 1))
+	{
+		ft_putstr("OK\n");
+		return (1);
+	}
+	else if (!list_is_valid(av + 1))
 	{
 		ft_putstr("KO\n");
 		return (0);
 	}
-	if (ac ==  2)
-	{
-		ft_putstr("OK\n");
-		return (0);
-	}
 	if (!(algo = init_algo(av + 1)))
 		return (0);
+	split_mediane(algo);
+print_piles(algo);
+sleep(3);
+	insert_b(algo);
+	print_piles(algo);
 	if (check_pile(algo))
 	{
 		ft_putstr("OK\n");
-		return(0);
+		printf("fait en %d coups\n", algo->count);
 	}
-	split_mediane(algo);
-	insert_b(algo);
-	print_piles(algo);
-	printf("fait en %d coups\n", algo->count);
-	if (check_pile(algo))
-		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
 	free(algo->pile_a);
