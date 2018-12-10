@@ -74,7 +74,7 @@ int			list_is_valid(char	**list)
 		{
 			if (ft_strequ(list[found], list[search]))
 			{
-				printf("DOUBLON\n");
+				ft_putstr("Error\n");
 				return (0);
 			}
 			found++;
@@ -138,27 +138,30 @@ t_algo		*init_algo(char **numbers)
 
 int			main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
 	t_algo	*algo;
-// attention au checking a la fin
-	av = randomize(LEN_LIST);
-	if (!list_is_valid(av))
+
+	if (ac < 2)
+		return (0);
+	if (!list_is_valid(av + 1))
 	{
 		ft_putstr("KO\n");
 		return (0);
 	}
+	if (ac ==  2)
+	{
+		ft_putstr("OK\n");
+		return (0);
+	}
 	if (!(algo = init_algo(av + 1)))
 		return (0);
-
-	//print_piles(algo);
-//sleep(2);
-		split_mediane(algo);
-	//print_piles(algo);
+	split_mediane(algo);
 	insert_b(algo);
 	print_piles(algo);
 	printf("fait en %d coups\n", algo->count);
-	//check_pile(algo);
+	if (check_pile(algo))
+		ft_putstr("OK\n");
+	else
+		ft_putstr("KO\n");
 	free(algo->pile_a);
 	free(algo->pile_b);
 	free(algo);

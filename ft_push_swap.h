@@ -3,7 +3,7 @@
 # include "libft/libft.h"
 # define NBMIN      0
 # define NBMAX      90000
-# define LEN_LIST   2000
+# define LEN_LIST   10
 
 typedef struct      s_algo
 {

@@ -10,13 +10,13 @@ char    **randomize(int len)
     i = 0;
     srand(time(NULL));
     list = (char **)malloc(sizeof(char *) * len + 1);
-    while (len > 0)
+    while (i < len)
     {
-        list[len] = ft_itoa(len);
-        len--;
+        list[i] = ft_itoa(i);
+        i++;
     }
-  //  i = 0;
-/*    while (i < len)
+   i = 0;
+    while (i < len)
     {
         int x = rand() % len + 1;
         int y = rand() % len + 1;
@@ -25,6 +25,6 @@ char    **randomize(int len)
         list[y] = swap;
         i++;
     }
-*/
+
     return (list);
 }
