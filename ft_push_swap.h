@@ -23,7 +23,7 @@ typedef struct      s_algo
 */
 char            **randomize(int len);
 void		    print_piles(t_algo *algo);
-int			    check_pile(t_algo *algo);
+int			    check_pile(t_list *pile);
 
 /*
 **      tri
