@@ -30,7 +30,8 @@ int			    check_pile(t_algo *algo);
 */
 void                split_mediane(t_algo *algo);
 void		        insert_b(t_algo *algo);
-
+void                ft_tri_3(t_algo *algo);
+void                ft_tri_2(t_algo *algo);
 /*
 **      actions
 */

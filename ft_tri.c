@@ -48,7 +48,6 @@ void		split_mediane(t_algo *algo)
 	int		mediane;
 
 	mediane = calculate_mediane(algo->pile_a);
-	printf("mediane = %d\n", mediane);
 	algo->min_a = get_min(algo->pile_a);
 	while (algo->pile_a->number != algo->min_a)
 		action_ra(algo);
@@ -65,8 +64,6 @@ void		split_mediane(t_algo *algo)
 		}
 		else
 			action_ra(algo);
-	//	print_piles(algo);
-	//	sleep(1);
 	}
 	if (algo->len_a > 2)
 		split_mediane(algo);
@@ -78,7 +75,6 @@ void		split_mediane(t_algo *algo)
 				action_sa(algo);
 			else
 				action_ra(algo);
-		//	print_piles(algo);
 		}
 	}
 }
@@ -89,7 +85,7 @@ void		insert_b(t_algo *algo)
 
 	min = get_min(algo->pile_b);
 	while (algo->pile_b->number != min)
-		action_rb(algo);
+		action_rrb(algo);
 	action_pa(algo);
 	if (algo->len_b)
 		insert_b(algo);
