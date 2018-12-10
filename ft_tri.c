@@ -29,18 +29,18 @@ static int		have_inf_mediane(t_list	*list, int mediane)
 	return (0);
 }
 
-int			get_min(t_list *tmp)
+int			get_max(t_list *tmp)
 {
-	int		min;
+	int		max;
 
-	min = tmp->number;
+	max = tmp->number;
 	while (tmp)
 	{
-		if (tmp->number > min)
-			min = tmp->number;
+		if (tmp->number > max)
+			max = tmp->number;
 		tmp = tmp->next;
 	}
-	return (min);
+	return (max);
 }
 
 void		split_mediane(t_algo *algo)
@@ -48,8 +48,13 @@ void		split_mediane(t_algo *algo)
 	int		mediane;
 
 	mediane = calculate_mediane(algo->pile_a);
+<<<<<<< HEAD
 	algo->min_a = get_min(algo->pile_a);
 	while (algo->pile_a->number != algo->min_a)
+=======
+	algo->max_a = get_max(algo->pile_a);
+	while (algo->pile_a->number != algo->max_a)
+>>>>>>> 776008e0c7422c2fafeb900233c2c36c349fd0fc
 		action_ra(algo);
 	while (have_inf_mediane(algo->pile_a, mediane))
 	{
@@ -65,9 +70,7 @@ void		split_mediane(t_algo *algo)
 		else
 			action_ra(algo);
 	}
-	if (algo->len_a > 2)
-		split_mediane(algo);
-	else
+	if (algo->len_a <= 2)
 	{
 		while (!check_pile(algo))
 		{
@@ -77,14 +80,21 @@ void		split_mediane(t_algo *algo)
 				action_ra(algo);
 		}
 	}
+	else
+		split_mediane(algo);
 }
 
 void		insert_b(t_algo *algo)
 {
-	int min;
+	int max;
 
+<<<<<<< HEAD
 	min = get_min(algo->pile_b);
 	while (algo->pile_b->number != min)
+=======
+	max = get_max(algo->pile_b);
+	while (algo->pile_b->number != max)
+>>>>>>> 776008e0c7422c2fafeb900233c2c36c349fd0fc
 		action_rrb(algo);
 	action_pa(algo);
 	if (algo->len_b)
