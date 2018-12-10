@@ -32,7 +32,7 @@ void		action_rb(t_algo *algo)
 	algo->pile_b = algo->pile_b->next;
 	algo->pile_b->prev = NULL;
 	tmp->next = NULL;
-	algo->count++;
+		algo->count++;
 	ft_putstr("rb\n");
 }
 
@@ -51,7 +51,7 @@ void		action_rra(t_algo *algo)
 		last->prev->number = swap;
 		last = last->prev;
 	}
-	algo->count++;
+		algo->count++;
 	ft_putstr("rra\n");
 }
 
@@ -67,6 +67,5 @@ void		action_rrb(t_algo *algo)
 	tmp->prev->next = NULL;
 	tmp->prev = NULL;
 	algo->pile_b = algo->pile_b->prev;
-	algo->count++;
 	ft_putstr("rrb\n");
 }

@@ -3,7 +3,7 @@
 # include "libft/libft.h"
 # define NBMIN      0
 # define NBMAX      90000
-# define LEN_LIST   2000
+# define LEN_LIST   10
 
 typedef struct      s_algo
 {
@@ -23,7 +23,7 @@ typedef struct      s_algo
 */
 char            **randomize(int len);
 void		    print_piles(t_algo *algo);
-int			    check_pile(t_list *pile);
+int			    check_pile(t_algo *algo);
 
 /*
 **      tri
